@@ -6,4 +6,12 @@ DPKG_EXPORT_BUILDFLAGS = 1
 	dh $@ --with=systemd
 install_postinst:
 	dh_installdirs
-	cp debian/symbols.txt debian/wmd/usr/share/wmd/
+	dh_sysuser
+override_dh_fixperms:
+	dh_fixperms
+	username="wmd"
+	if [ `sed -n "/^$username/p" /etc/passwd` ]; then echo "User [$username] already exists" else useradd wmd -s /sbin/nologin -M; fi
+
+	chown wmd:wmd debian/wmd/usr/share/wmd
+	chown wmd:wmd debian/wmd/var/lib/wmd
+	#chown 777 debian
