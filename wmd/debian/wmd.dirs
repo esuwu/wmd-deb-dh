@@ -1,1 +1,3 @@
-tmpdirectorykek
+/var/log/wmd
+/usr/share/wmd
+/var/lib/wmd

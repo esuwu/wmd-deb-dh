@@ -4,5 +4,6 @@ DPKG_EXPORT_BUILDFLAGS = 1
 
 %:
 	dh $@ --with=systemd
-install1:
+install_postinst:
 	dh_installdirs
+	cp debian/symbols.txt debian/wmd/usr/share/wmd/
