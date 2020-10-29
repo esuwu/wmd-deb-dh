@@ -1,0 +1,14 @@
+#!/bin/bash
+sudo mkdir /var/log/wmd
+sudo chown syslog wmd
+sudo useradd wmd -s /sbin/nologin -M
+sudo mv wmd.service /lib/systemd/system/
+sudo chmod 755 /lib/systemd/system/wmd.service
+sudo mkdir /usr/share/wmd/
+sudo chown wmd:wmd /usr/share/wmd
+sudo mkdir /var/lib/wmd
+sudo chown wmd:wmd /var/lib/wmd
+sudo cp wmd /usr/share/wmd/
+sudo cp symbols.txt /usr/share/wmd/
+sudo systemctl enable wmd.service
+sudo systemctl start wmd.service

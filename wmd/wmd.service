@@ -1,0 +1,24 @@
+[Unit]
+Description=Waves Market Data System Service v0.8.1-3-g99f3317-dirty
+ConditionPathExists=/usr/share/wmd
+After=network.target
+
+[Service]
+Type=simple
+User=wmd
+Group=wmd
+LimitNOFILE=1024
+Restart=on-failure
+RestartSec=60
+WorkingDirectory=/usr/share/wmd
+PermissionsStartOnly=true
+ExecStart=/usr/share/wmd/wmd -db /var/lib/wmd/ -address 0.0.0.0:6990 -node grpc.wavesnodes.com:6870 -symbols /usr/share/wmd/symbols.txt -sync-interval 10
+ExecStartPre=/bin/mkdir -p /var/log/wmd
+ExecStartPre=/bin/chown syslog:adm /var/log/wmd
+ExecStartPre=/bin/chmod 755 /var/log/wmd
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=wmd
+
+[Install]
+WantedBy=multi-user.target

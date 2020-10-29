@@ -1,0 +1,8 @@
+#!/usr/bin/make -f
+
+DPKG_EXPORT_BUILDFLAGS = 1
+
+%:
+	dh $@ --with=systemd
+install1:
+	dh_installdirs
