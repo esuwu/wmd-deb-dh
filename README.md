@@ -7,3 +7,6 @@
 ## Clean tree files:
  - cd wmd
  - fakeroot debian/rules clean
+ 
+## Delete:
+- sudo apt-get -y remove wmd
